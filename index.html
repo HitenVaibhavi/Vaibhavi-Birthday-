@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎂 Happy Birthday Vaibhavi!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 50% 20%, #0f2027, #203a43, #2c5364);
+      background-size: cover;
+      overflow: hidden;
+      font-family: 'Pacifico', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('https://i.imgur.com/1bX5QH6.png') repeat;
+      z-index: 0;
+      opacity: 0.4;
+      animation: twinkle 2s infinite ease-in-out alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.3; }
+      100% { opacity: 0.6; }
+    }
+
+    h1 {
+      z-index: 2;
+      font-size: 2.8rem;
+      color: #fff0f3;
+      animation: floatText 3s ease-in-out infinite;
+    }
+
+    @keyframes floatText {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .button {
+      z-index: 2;
+      padding: 16px 32px;
+      font-size: 1.5rem;
+      background-color: #ffb5a7;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+    }
+
+    .cake {
+      z-index: 2;
+      width: 200px;
+      height: 200px;
+      background: #ffcad4;
+      border-radius: 20px 20px 10px 10px;
+      position: relative;
+      margin-top: 40px;
+      opacity: 0;
+      transform: scale(0);
+      transition: all 1s ease-in-out;
+    }
+
+    .cake.cut {
+      animation: cutCake 1s ease-in-out forwards;
+    }
+
+    @keyframes cutCake {
+      0% { transform: scale(1); background: #ffcad4; }
+      50% { background: #ffc8dd; }
+      100% { transform: scale(1.1); background: #fff0f3; }
+    }
+
+    .candle {
+      width: 10px;
+      height: 50px;
+      background: #ffffff;
+      position: absolute;
+      top: -50px;
+      left: 95px;
+      border-radius: 5px;
+      display: none;
+    }
+
+    .flame {
+      width: 10px;
+      height: 15px;
+      background: gold;
+      border-radius: 50%;
+      position: absolute;
+      top: -15px;
+      left: 0;
+      display: none;
+      animation: flameFlicker 0.2s infinite alternate;
+    }
+
+    @keyframes flameFlicker {
+      from { transform: scaleY(1); }
+      to { transform: scaleY(1.3); }
+    }
+
+    .message {
+      margin-top: 30px;
+      font-size: 1.6rem;
+      color: #ffe5ec;
+      text-align: center;
+      opacity: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid #ffe5ec;
+      width: 0;
+      animation: none;
+    }
+
+    @keyframes typewriter {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Happy Birthday <span id="name">Vaibhavi Sinha</span>! 🎉</h1>
+
+  <button class="button" onclick="revealCake()">Click to open your cake 🎂</button>
+
+  <div class="cake" id="cake">
+    <div class="candle" id="candle">
+      <div class="flame" id="flame"></div>
+    </div>
+  </div>
+
+  <div class="message" id="wish">Dear Vaibhavi, you’re a shining star! ✨ Wishing you joy, magic & endless smiles 💖</div>
+
+  <audio id="bgmusic" autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    function revealCake() {
+      const cake = document.getElementById("cake");
+      const candle = document.getElementById("candle");
+      const flame = document.getElementById("flame");
+      const wish = document.getElementById("wish");
+      const music = document.getElementById("bgmusic");
+
+      cake.style.opacity = "1";
+      cake.style.transform = "scale(1)";
+      
+      setTimeout(() => {
+        cake.classList.add("cut");
+        candle.style.display = "block";
+        flame.style.display = "block";
+        wish.style.opacity = "1";
+        wish.style.animation = "typewriter 4s steps(60, end) forwards";
+        try {
+          music.play();
+        } catch (e) {
+          alert("Tap again to enable music 🎵");
+        }
+        launchConfetti();
+      }, 1000);
+    }
+
+    function launchConfetti() {
+      const duration = 5 * 1000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 6,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: ['#ffcad4', '#cdb4db', '#ffc8dd', '#bde0fe']
+        });
+        confetti({
+          particleCount: 6,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: ['#ffcad4', '#cdb4db', '#ffc8dd', '#bde0fe']
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+  </script>
+</body>
+</html>
